@@ -19,22 +19,20 @@ const { NotImplementedError } = require("../extensions/index.js");
 function renameFiles(names) {
   const arrUniq = [];
 
-  let count = 1;
+  let count = 0;
 
   for (let el of names) {
     if (arrUniq.indexOf(el) === -1) {
       arrUniq.push(el);
     } else {
       for (let item of arrUniq) {
-        if (el === item) {
-          count++;
-        } else if (item === `${el}(${count})`) {
+        if (el === item || item === `${el}(${count})`) {
           count++;
         }
       }
+      arrUniq.push(`${el}(${count})`);
+      count = 0;
     }
-    arrUniq.push(`${el}(${count})`);
-    count = 0;
   }
   return arrUniq;
 }
