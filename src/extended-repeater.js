@@ -16,27 +16,56 @@ const { NotImplementedError } = require("../extensions/index.js");
  *
  */
 function repeater(str, options) {
+  let repeat;
   let separator;
   let sepLen;
-  let repeat = options.repeatTimes;
+  let addition;
+  let addRepeat;
+  let separAdit;
+
+  if (options.repeatTimes) {
+    repeat = options.repeatTimes;
+  } else {
+    repeat = 1;
+  }
+
   if (options.separator) {
     separator = options.separator;
   } else {
     separator = "+";
   }
 
+  if (options.addition) {
+    addition = options.addition;
+  } else {
+    addition = "";
+  }
+
+  if (options.additionRepeatTimes) {
+    addRepeat = options.additionRepeatTimes;
+  } else {
+    addRepeat = 1;
+  }
+
+  if (options.additionSeparator != undefined) {
+    separAdit = options.additionSeparator;
+  } else {
+    separAdit = "";
+  }
+
   sepLen = separator.length;
 
-  sepLen;
+  const resultStr = `${str}`;
 
-  const resultStr = `${str}${separator}`.repeat(repeat);
+  const resultAddStr = `${addition}${separAdit}`.repeat(addRepeat - 1);
 
-  const resultArr = resultStr.split("");
-  const newArr = resultArr.slice(0, -sepLen);
+  const result = `${resultStr}${resultAddStr}${addition}${separator}`.repeat(
+    repeat
+  );
 
-  console.log(newArr);
+  const newArr = result.slice(0, -sepLen);
 
-  return newArr.join("");
+  return newArr;
 }
 
 module.exports = {
