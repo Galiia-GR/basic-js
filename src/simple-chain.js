@@ -37,7 +37,7 @@ const chainMaker = {
       throw new Error("You can't remove incorrect link!");
     }
     index = this.chainArr.indexOf(`(${position})`);
-    this.chainArr.splice(-index, 1);
+    this.chainArr.splice(position - 1, 1);
     return this;
   },
 
@@ -51,7 +51,6 @@ const chainMaker = {
     return end;
   },
 };
-
 module.exports = {
   chainMaker,
 };
